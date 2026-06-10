@@ -1,0 +1,35 @@
+{
+	"folders": [
+		{
+			"path": ".."
+		}
+	],
+	"settings": {
+		"chat.tools.terminal.autoApprove": {
+			"lsb_release": true,
+			"command": true,
+			"apt-cache": true,
+			"/^sudo apt-get update && sudo apt-get install -y python3\\.13 python3\\.13-venv python3\\.13-distutils$/": {
+				"approve": true,
+				"matchCommandLine": true
+			},
+			"/^sudo apt-get install -y python3\\.13 python3\\.13-venv$/": {
+				"approve": true,
+				"matchCommandLine": true
+			},
+			"python3.13": true,
+			"/^source \\.venv/bin/activate && python -m pip install python-dotenv$/": {
+				"approve": true,
+				"matchCommandLine": true
+			},
+			"/^source \\.venv/bin/activate && python -m pip install agent_framework_foundry$/": {
+				"approve": true,
+				"matchCommandLine": true
+			},
+			"/^source \\.venv/bin/activate && python -m pip install aiohttp$/": {
+				"approve": true,
+				"matchCommandLine": true
+			}
+		}
+	}
+}

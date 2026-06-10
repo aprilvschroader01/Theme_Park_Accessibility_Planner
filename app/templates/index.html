@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Theme Park Accessibility Planner</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🏰 Theme Park Accessibility Planner</h1>
+            <p>Get personalized dietary and accessibility recommendations for your theme park visit</p>
+        </header>
+
+        <main>
+            <form id="queryForm" class="form-card">
+                <h2>Plan Your Visit</h2>
+                
+                <div class="form-group">
+                    <label for="parkName">Theme Park *</label>
+                    <select id="parkName" name="parkName" required>
+                        <option value="">-- Select a Park --</option>
+                        <option value="Magic Kingdom">Magic Kingdom</option>
+                        <option value="EPCOT">EPCOT</option>
+                        <option value="Hollywood Studios">Hollywood Studios</option>
+                        <option value="Animal Kingdom">Animal Kingdom</option>
+                        <option value="Universal Studios">Universal Studios</option>
+                        <option value="Islands of Adventure">Islands of Adventure</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="dietaryRestrictions">Dietary Restrictions <span class="hint">(comma-separated)</span></label>
+                    <input 
+                        type="text" 
+                        id="dietaryRestrictions" 
+                        name="dietaryRestrictions" 
+                        placeholder="e.g., vegan, gluten-free, vegetarian"
+                    >
+                    <small>Examples: vegan, vegetarian, gluten-free, kosher, halal</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="allergens">Allergens to Avoid <span class="hint">(comma-separated)</span></label>
+                    <input 
+                        type="text" 
+                        id="allergens" 
+                        name="allergens" 
+                        placeholder="e.g., peanuts, shellfish, dairy, tree nuts"
+                    >
+                    <small>Examples: peanuts, tree nuts, shellfish, dairy, eggs, soy, sesame</small>
+                </div>
+
+                <button type="submit" class="btn-primary" id="submitBtn">
+                    Generate Plan
+                </button>
+            </form>
+
+            <div id="loading" class="loading hidden">
+                <div class="spinner"></div>
+                <p>Generating your personalized plan...</p>
+            </div>
+
+            <div id="error" class="error-message hidden"></div>
+
+            <div id="planContainer" class="plan-card hidden">
+                <h2>Your Personalized Dietary Plan</h2>
+                <div id="parkInfo" class="park-info"></div>
+                <div id="planContent" class="plan-content"></div>
+            </div>
+        </main>
+
+        <footer>
+            <p>🌟 Theme Park Accessibility Planner | For Hackathon 2024</p>
+            <p><small>Phase 1: Dietary Planning | Phase 2: Accessibility Accommodations</small></p>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>

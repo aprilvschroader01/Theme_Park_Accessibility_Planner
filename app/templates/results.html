@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Plan - Theme Park Accessibility Planner</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🏰 Theme Park Accessibility Planner</h1>
+            <p>Your Personalized Plan</p>
+        </header>
+
+        <main>
+            <div id="resultsContainer" class="plan-card">
+                <div id="loading" class="loading">
+                    <div class="spinner"></div>
+                    <p>Loading your plan...</p>
+                </div>
+                <div id="error" class="error-message hidden"></div>
+                <div id="planContent" class="hidden"></div>
+            </div>
+
+            <div class="action-buttons">
+                <a href="/" class="btn-secondary">← Plan Another Visit</a>
+            </div>
+        </main>
+
+        <footer>
+            <p>🌟 Theme Park Accessibility Planner | For Hackathon 2024</p>
+        </footer>
+    </div>
+
+    <script>
+        const queryId = new URLSearchParams(window.location.search).get('query_id');
+        
+        if (!queryId) {
+            window.location.href = '/';
+        }
+
+        // Fetch and display the plan
+        fetch(`/api/query/${queryId}`)
+            .then(response => response.json())
+            .then(data => {
+                const loading = document.getElementById('loading');
+                const content = document.getElementById('planContent');
+                
+                loading.classList.add('hidden');
+                
+                if (data.success && data.plan) {
+                    content.innerHTML = `<pre>${escapeHtml(data.plan)}</pre>`;
+                    content.classList.remove('hidden');
+                } else {
+                    document.getElementById('error').innerHTML = 'Failed to load plan';
+                    document.getElementById('error').classList.remove('hidden');
+                }
+            })
+            .catch(error => {
+                document.getElementById('loading').classList.add('hidden');
+                document.getElementById('error').innerHTML = `Error: ${error.message}`;
+                document.getElementById('error').classList.remove('hidden');
+            });
+
+        function escapeHtml(text) {
+            const map = {
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                '"': '&quot;',
+                "'": '&#039;'
+            };
+            return text.replace(/[&<>"']/g, m => map[m]);
+        }
+    </script>
+</body>
+</html>
