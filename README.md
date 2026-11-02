@@ -1,6 +1,6 @@
 # Theme Park Accessibility Planner
 
-Using AI and Azure OpenAI, this application helps guests with dietary restrictions and disabilities better navigate theme parks.
+This application helps guests with dietary restrictions and disabilities better navigate theme parks.
 
 ## 🎯 Project Vision
 
